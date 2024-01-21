@@ -1,8 +1,9 @@
-import { Link, useNavigate , useMatch } from "react-router-dom";
+import { Link, useNavigate , useMatch, useLocation } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { motion, useAnimation , useScroll} from "framer-motion";
+import { AnimatePresence, motion, useAnimation , useScroll} from "framer-motion";
 import ReactStars from "react-stars";
+import Modal from "./Modal";
 
 const Nav = styled(motion.nav)`
   display: flex;
@@ -49,6 +50,9 @@ const Review = styled.div`
     margin-top : -4px; 
     margin-right: 5px;
   }
+  .ratingValue{
+    cursor: pointer;
+  }
 `;
 const navVariants = {
   top : {
@@ -58,8 +62,17 @@ const navVariants = {
       backgroundColor:"rgba(255,255,255,0.5)"
   }
 }
+export interface IReviews{
+  id : number;
+  username: string;
+  date : number;
+  title : string;
+  overview : string;
+  star : number;
+}
+
 function Header(){
-  // const navigate = useNavigate ();
+  const navigate = useNavigate ();
   const homeMatch = useMatch("/");
   const galleryMatch = useMatch("/gallery");
   const roomMatch = useMatch("/room");
@@ -68,7 +81,7 @@ function Header(){
   const eventMatch = useMatch("/event");
   const navAnimation = useAnimation();
   const {scrollY} = useScroll();
-  let voteValue = 3.9;
+  const reviewMatch = useMatch(`/review`);
   useEffect(()=>{
     scrollY.onChange(()=>{
         if(scrollY.get() >50){
@@ -78,6 +91,64 @@ function Header(){
         }
     });
 },[scrollY, navAnimation]);
+
+  const reviewClick = () => {
+    navigate('/review');
+  }
+
+  const reviewList : Array<IReviews> = [
+    {id : 0,
+    username : "Jsae06",
+    date : 20240105,
+    title : "JW Seoul",
+    overview : "This hotel embodies the luxury line of Marriott hotels. The service staff were extremely respectful and attentive. No luxury Marriott hotel I’ve stayed at in the US comes close to what you’ll experience here in terms of service.",
+    star : 5,
+    },
+    {id : 1,
+        username : "Ed",
+        date : 20240103,
+        title : "Treated like a top end customer",
+        overview : "Excellent stay and manager night shift female I didn’t get her name but she took me around and let me view the suites before choosing one was an awesome gesture of a manger who cares about customers.",
+        star : 5,
+    },
+    {id : 2,
+        username : "Eunice Park",
+        date : 20240101,
+        title : "Best service you can get at a 5 star hotel!",
+        overview : "I've stayed at quite a bit of Marriott hotels all over the US. But experiences at JW Marriott Seoul is by far the best. First, losing the passport abroad is a frightening experience while traveling with my family. But the hotel staff, Kyrie Cho worked swiftly and effectively to find it in one of the three possible shops that could've had the passport and delivered it in the fastest possible way to the airport in time for our travel back to the US. This is not at all expected and I was really shocked at the level of dedication and service JW Marriott provided. I have returned to Korea and extended my stay at this hotel due to this extremely positive, heart-warming experience. I recommend highly to check out this hotel.",
+        star : 5,
+    },
+    {id : 3,
+        username : "Myeong Jackson",
+        date : 20231229,
+        title : "Excellent foods and environment",
+        overview : "We love foods at Marriott!",
+        star : 5,
+    },
+    {id : 4,
+        username : "Andy",
+        date : 20231226,
+        title : "Never Choose JW Marriott Hotel Seoul",
+        overview : "As a platinum Marriott member, this hotel is very much not recommended by me. 1. The hotel signage is particularly inconspicuous, and it's very difficult to find the check in place, whether you're coming from the shopping mall or directly from the main entrance; 2. The hotel's rooms are small in the hallways, and the hygiene is organized in a very poor way; 3. The hotel front desk is very annoying, and will bother you time and time again, and doesn't care at all about the customer's feelings;4.All kinds of requirements and restrictions, such as Happy hour can only be one hour, so on and so forth, sorry to have been to a lot of countries for the first time in Korea have this treatment. You can try some other hotels in Korea, but don't come back to this hotel.",
+        star : 1,
+    },
+    {id : 5,
+        username : "Amelie",
+        date : 20231221,
+        title : "Must try this hotel if you are planning to be in Seoul",
+        overview : "Been staying in this hotel for many years and it’s always clean and excellent service.",
+        star : 5,
+    },
+    {id : 6,
+        username : "Jsae06",
+        date : 20231208,
+        title : "Great hotel",
+        overview : "It’s always a pleasure staying the the Marriott Seoul. Wonderful hotel and very kind staff.",
+        star : 5,
+    },
+]
+  let voteValue = Number((reviewList.map(review=>review.star).reduce((prev,curr)=>prev+curr,0) /reviewList.length).toFixed(1));
+
   return(
     <Nav
      variants={navVariants}
@@ -129,9 +200,15 @@ function Header(){
         edit={false}
         className="rating"
       />
-      <span className="ratingValue">({voteValue}점)</span>
+      <span className="ratingValue" onClick={reviewClick} >({voteValue}점)</span>
+      {reviewMatch ? (
+        <AnimatePresence>
+          <Modal title = "review" reviewList={reviewList}/>
+        </AnimatePresence>  
+      ) : null}
+      
+
     </Review>
-   
        
   </Nav>
   );

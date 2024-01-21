@@ -87,10 +87,10 @@ root.render(
     <RecoilRoot>
       <QueryClientProvider client={client}>
         <ThemeProvider theme ={theme}>
-          <BrowserRouter >
-          <GlovalStyle />
-          <App />
-          </BrowserRouter>     
+          <BrowserRouter>
+            <GlovalStyle />
+            <App />  
+          </BrowserRouter>
         </ThemeProvider>
       </QueryClientProvider>
      </RecoilRoot>

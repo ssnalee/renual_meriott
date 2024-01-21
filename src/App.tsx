@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {Routes , Route } from "react-router-dom";
+import {Routes , Route, useLocation } from "react-router-dom";
 import styled from "styled-components";
 // import './App.css';
 import { motion, useAnimation , useScroll} from "framer-motion";
@@ -12,13 +12,16 @@ import Gallery from "./Routes/Gallery";
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
       <Routes>
-        <Route path="/" element = {<Home />} /> 
+        <Route path="/" element = {<Home />}>
+         {/* <Route path= "/review" element = {<Home />} /> */}
+        </Route> 
         <Route path="/gallery" element = {<Gallery />} /> 
       </Routes>
-    </div>
+
+    </>
   );
 }
 
