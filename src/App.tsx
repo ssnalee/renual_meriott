@@ -12,7 +12,7 @@ import Event from "./Routes/Event";
 
 function App() {
   return (
-    <div>
+    <>
       <Header />
       <Routes>
         <Route path="/" element = {<Home />}>
@@ -23,7 +23,6 @@ function App() {
         <Route path="/event" element = {<Event />} >
         </Route>
       </Routes>
-
     </>
   );
 }

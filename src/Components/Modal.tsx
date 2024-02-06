@@ -18,7 +18,7 @@ const Overlay = styled(motion.div)`
 `;
 const ModalBox = styled(motion.div)`
   position: fixed;
-  top: 18%;
+  top: 50%;
   left: 0;
   right: 0;
   margin: 0 auto;
