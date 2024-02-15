@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/renul_Merriot/static/css/main.3f442deb.css",
+    "main.js": "/renul_Merriot/static/js/main.12ecbb67.js",
+    "static/media/slick.svg": "/renul_Merriot/static/media/slick.2630a3e3eab21c607e21.svg",
+    "static/media/slick.eot": "/renul_Merriot/static/media/slick.a4e97f5a2a64f0ab1323.eot",
+    "static/media/slick.ttf": "/renul_Merriot/static/media/slick.c94f7671dcc99dce43e2.ttf",
+    "static/media/slick.woff": "/renul_Merriot/static/media/slick.295183786cd8a1389865.woff",
+    "index.html": "/renul_Merriot/index.html",
+    "main.3f442deb.css.map": "/renul_Merriot/static/css/main.3f442deb.css.map",
+    "main.12ecbb67.js.map": "/renul_Merriot/static/js/main.12ecbb67.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f442deb.css",
+    "static/js/main.12ecbb67.js"
+  ]
+}
